@@ -2,11 +2,10 @@
 
 Dataset completo y estructurado de la **clasificación ATC (Anatomical Therapeutic Chemical)** de medicamentos, extraído de la página oficial de la **ANMAT (Administración Nacional de Medicamentos, Alimentos y Tecnología Médica de Argentina)**.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CSV](https://img.shields.io/badge/format-CSV-blue)](codigos_atc_NUEVO_LIMPIO.csv)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![CSV](https://img.shields.io/badge/format-CSV-blue)](codigos_atc.csv)
 [![JSON](https://img.shields.io/badge/format-JSON-blue)](codigos_atc.json)
-[![Records](https://img.shields.io/badge/records-4,581-brightgreen)]()
-
+[![Records](https://img.shields.io/badge/records-4581-brightgreen)](codigos_atc.csv)
 
 ---
 
@@ -43,19 +42,18 @@ Este recurso es ideal para:
 
 ## 🧩 Estructura de los datos
 
-El dataset contiene la clasificación ATC adaptada de ANMAT, estructurada en los siguientes campos y jerarquías con niveles unificados:
+El dataset contiene la clasificación ATC adaptada de ANMAT, estructurada en los siguientes campos y jerarquías con niveles unificados para coincidir estrictamente con la planilla de datos de origen:
 
 | Campo | Descripción | Ejemplo |
 |-------|-------------|---------|
 | `N1_COD` | Nivel 1: Grupo anatómico principal | `A` |
-| `GRUPO ANATÓMICO PRINCIPAL` | Descripción del nivel 1 | `TRACTO ALIMENTARIO Y METABOLISMO` |
-| `N23_COD` | **Niveles 2 y 3 fusionados (ANMAT):** Grupo y subgrupo terapéutico | `A01A` |
-| `GRUPO/SUBGRUPO TERAPÉUTICO` | Descripción de los niveles 2 y 3 unificados | `PREPARADOS ESTOMATOLÓGICOS` |
-| `N4_COD` | Nivel 4: Subgrupo químico-terapéutico | `A01AA` |
-| `FAMILIA O SUBGRUPO QUÍMICO-TERAPÉUTICO` | Descripción del nivel 4 | `AGENTES PARA LA PROFILAXIS DE LAS CARIES` |
-| `N5_COD` | Nivel 5: Código completo de la sustancia química | `A01AA01` |
-| `PRINCIPIO ACTIVO / SUSTANCIA QUÍMICA` | Descripción del nivel 5 (Principio activo) | `FLUORURO DE SODIO` |
-
+| `GRUPO ANATÓMICO PRINCIPAL` | Descripción de la clasificación anatómica del nivel 1 | `TRACTO ALIMENTARIO Y METABOLISMO` |
+| `N23_COD` | **Niveles 2 y 3 fusionados (ANMAT):** Código combinado del subgrupo terapéutico | `A01A` |
+| `GRUPO/SUBGRUPO TERAPÉUTICO` | Descripción unificada de los niveles 2 y 3 según el criterio de la entidad local | `PREPARADOS ESTOMATOLÓGICOS` |
+| `N4_COD` | Nivel 4: Código de la familia o subgrupo químico-terapéutico (5 caracteres) | `A01AA` |
+| `FAMILIA O SUBGRUPO QUÍMICO-TERAPÉUTICO` | Descripción correspondiente al nivel 4 | `AGENTES PARA LA PROFILAXIS DE LAS CARIES` |
+| `N5_COD` | Nivel 5: Código completo e identificador final de la sustancia química (7 caracteres) | `A01AA01` |
+| `PRINCIPIO ACTIVO / SUSTANCIA QUÍMICA` | Descripción del nivel 5 que identifica al fármaco o principio activo individual | `FLUORURO DE SODIO` |
 
 ---
 
@@ -64,24 +62,24 @@ El dataset contiene la clasificación ATC adaptada de ANMAT, estructurada en los
 ```json
 [
   {
-    "N1_Cod": "A",
-    "Grupo Anatómico Principal": "TRACTO ALIMENTARIO Y METABOLISMO",
-    "N2-3_Cod": "A01A",
-    "Grupo/Subgrupo Terapéutico": "PREPARADOS ESTOMATOLÓGICOS",
-    "N3_Cod": "A01AA",
-    "Familia o Subgrupo Químico-Terapéutico": "Agentes para la profilaxis de las caries",
-    "N4_Cod": "A01AA01",
-    "Principio Activo / Sustancia Química": "fluoruro de sodio"
+    "N1_COD": "A",
+    "GRUPO ANATÓMICO PRINCIPAL": "TRACTO ALIMENTARIO Y METABOLISMO",
+    "N23_COD": "A01A",
+    "GRUPO/SUBGRUPO TERAPÉUTICO": "PREPARADOS ESTOMATOLÓGICOS",
+    "N4_COD": "A01AA",
+    "FAMILIA O SUBGRUPO QUÍMICO-TERAPÉUTICO": "AGENTES PARA LA PROFILAXIS DE LAS CARIES",
+    "N5_COD": "A01AA01",
+    "PRINCIPIO ACTIVO / SUSTANCIA QUÍMICA": "FLUORURO DE SODIO"
   },
   {
-    "N1_Cod": "A",
-    "Grupo Anatómico Principal": "TRACTO ALIMENTARIO Y METABOLISMO",
-    "N2-3_Cod": "A01A",
-    "Grupo/Subgrupo Terapéutico": "PREPARADOS ESTOMATOLÓGICOS",
-    "N3_Cod": "A01AA",
-    "Familia o Subgrupo Químico-Terapéutico": "Agentes para la profilaxis de las caries",
-    "N4_Cod": "A01AA02",
-    "Principio Activo / Sustancia Química": "monofluorfosfato de sodio"
+    "N1_COD": "A",
+    "GRUPO ANATÓMICO PRINCIPAL": "TRACTO ALIMENTARIO Y METABOLISMO",
+    "N23_COD": "A01A",
+    "GRUPO/SUBGRUPO TERAPÉUTICO": "PREPARADOS ESTOMATOLÓGICOS",
+    "N4_COD": "A01AA",
+    "FAMILIA O SUBGRUPO QUÍMICO-TERAPÉUTICO": "AGENTES PARA LA PROFILAXIS DE LAS CARIES",
+    "N5_COD": "A01AA02",
+    "PRINCIPIO ACTIVO / SUSTANCIA QUÍMICA": "MONOFLUORFOSFATO DE SODIO"
   }
 ]
 ```
@@ -90,18 +88,18 @@ El dataset contiene la clasificación ATC adaptada de ANMAT, estructurada en los
 
 ## 🚀 Uso
 
-### CSV
+### CSV (Python)
 
 ```python
 import csv
 
-with open("codigos_atc.csv", "r", encoding="utf-8-sig") as f:
+with open("codigos_atc_NUEVO_LIMPIO.csv", "r", encoding="utf-8-sig") as f:
     reader = csv.DictReader(f, delimiter=";")
     for row in reader:
-        print(row["N4_Cod"], row["Principio Activo / Sustancia Química"])
+        print(row["N5_COD"], row["PRINCIPIO ACTIVO / SUSTANCIA QUÍMICA"])
 ```
 
-### JSON
+### JSON (Python)
 
 ```python
 import json
@@ -109,7 +107,7 @@ import json
 with open("codigos_atc.json", "r", encoding="utf-8") as f:
     datos = json.load(f)
     for item in datos:
-        print(item["N4_Cod"], item["Principio Activo / Sustancia Química"])
+        print(item["N5_COD"], item["PRINCIPIO ACTIVO / SUSTANCIA QUÍMICA"])
 ```
 
 ### JavaScript / Node.js
@@ -117,7 +115,7 @@ with open("codigos_atc.json", "r", encoding="utf-8") as f:
 ```javascript
 const data = require("./codigos_atc.json");
 data.forEach(item => {
-    console.log(item["N4_Cod"], item["Principio Activo / Sustancia Química"]);
+    console.log(item["N5_COD"], item["PRINCIPIO ACTIVO / SUSTANCIA QUÍMICA"]);
 });
 ```
 
@@ -129,9 +127,9 @@ CREATE TABLE atc (
     grupo_anatomico TEXT,
     n23_cod TEXT,
     grupo_terapeutico TEXT,
-    n3_cod TEXT,
+    n4_cod TEXT,
     familia_quimica TEXT,
-    n4_cod TEXT PRIMARY KEY,
+    n5_cod TEXT PRIMARY KEY,
     principio_activo TEXT
 );
 
@@ -144,7 +142,7 @@ CREATE TABLE atc (
 
 Los datos fueron extraídos de la página oficial de la **ANMAT**:
 
-🔗 [https://www.anmat.gob.ar/atc/CodigosATC.asp](https://www.anmat.gob.ar/atc/CodigosATC.asp)
+🔗 [https://anmat.gob.ar](https://www.anmat.gob.ar/atc/CodigosATC.asp)
 
 **Nota importante:** Este dataset es un trabajo de extracción, estructuración y normalización de información pública. La ANMAT no respalda ni está afiliada a este proyecto. Los datos se proporcionan "tal cual" y se recomienda validar con fuentes oficiales para usos críticos.
 
@@ -154,10 +152,10 @@ Los datos fueron extraídos de la página oficial de la **ANMAT**:
 
 Este proyecto está bajo una **doble licencia**, según el tipo de contenido:
 
-- **Los datos (`codigos_atc.csv` y `codigos_atc.json`)** → [CC0 1.0 Universal (Dominio Público)](https://creativecommons.org/publicdomain/zero/1.0/deed.es)  
+- **Los datos (`codigos_atc.csv` y `codigos_atc.json`)** → [CC0 1.0 Universal (Dominio Público)](https://creativecommons.org)  
   Puedes usarlos, modificarlos, compartirlos y comercializarlos sin restricciones.
 
-- **El código (scripts de extracción)** → [MIT License](https://opensource.org/licenses/MIT)  
+- **El código (scripts de extracción)** → [MIT License](https://opensource.org)  
   Puedes usarlo, modificarlo y distribuirlo libremente, siempre que se incluya el aviso de copyright.
 
 En resumen: **hacé lo que quieras con los datos y el código, no hay restricciones.**
@@ -176,8 +174,8 @@ Si encontrás errores, datos faltantes o querés mejorar el dataset, podés:
 
 ## 📬 Contacto
 
-**Autor:** [Pablo Bella](https://github.com/psbella)  
-**Repositorio:** [https://github.com/psbella/Codigos-ATC-ANMAT](https://github.com/psbella/Codigos-ATC-ANMAT)
+**Autor:** [Pablo Bella](https://github.com)  
+**Repositorio:** [https://github.com/Codigos-ATC-ANMAT](https://github.com/Codigos-ATC-ANMAT)
 
 ---
 
