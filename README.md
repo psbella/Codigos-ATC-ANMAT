@@ -43,18 +43,19 @@ Este recurso es ideal para:
 
 ## 🧩 Estructura de los datos
 
-El dataset contiene los **5 niveles jerárquicos** de la clasificación ATC, más el código completo y su descripción en español.
+El dataset contiene la clasificación ATC adaptada de ANMAT, estructurada en los siguientes campos y jerarquías con niveles unificados:
 
 | Campo | Descripción | Ejemplo |
 |-------|-------------|---------|
-| `N1_Cod` | Nivel 1: Grupo anatómico principal | `A` |
-| `Grupo Anatómico Principal` | Descripción del nivel 1 | `TRACTO ALIMENTARIO Y METABOLISMO` |
-| `N2-3_Cod` | Nivel 2: Grupo terapéutico | `A01A` |
-| `Grupo/Subgrupo Terapéutico` | Descripción del nivel 2 | `PREPARADOS ESTOMATOLÓGICOS` |
-| `N3_Cod` | Nivel 3: Subgrupo químico-terapéutico | `A01AA` |
-| `Familia o Subgrupo Químico-Terapéutico` | Descripción del nivel 3 | `Agentes para la profilaxis de las caries` |
-| `N4_Cod` | Nivel 4: Código completo (principio activo) | `A01AA01` |
-| `Principio Activo / Sustancia Química` | Descripción del nivel 4 | `fluoruro de sodio` |
+| `N1_COD` | Nivel 1: Grupo anatómico principal | `A` |
+| `GRUPO ANATÓMICO PRINCIPAL` | Descripción del nivel 1 | `TRACTO ALIMENTARIO Y METABOLISMO` |
+| `N23_COD` | **Niveles 2 y 3 fusionados (ANMAT):** Grupo y subgrupo terapéutico | `A01A` |
+| `GRUPO/SUBGRUPO TERAPÉUTICO` | Descripción de los niveles 2 y 3 unificados | `PREPARADOS ESTOMATOLÓGICOS` |
+| `N4_COD` | Nivel 4: Subgrupo químico-terapéutico | `A01AA` |
+| `FAMILIA O SUBGRUPO QUÍMICO-TERAPÉUTICO` | Descripción del nivel 4 | `AGENTES PARA LA PROFILAXIS DE LAS CARIES` |
+| `N5_COD` | Nivel 5: Código completo de la sustancia química | `A01AA01` |
+| `PRINCIPIO ACTIVO / SUSTANCIA QUÍMICA` | Descripción del nivel 5 (Principio activo) | `FLUORURO DE SODIO` |
+
 
 ---
 
